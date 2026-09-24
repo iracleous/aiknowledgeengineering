@@ -1,0 +1,24 @@
+[project]
+name = "dataapi"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Dimitris Iracleous", email = "iracleous@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "dotenv>=0.9.9",
+    "fastapi>=0.141.1",
+    "langchain-core>=1.6.4",
+    "langchain-openai>=1.6.5",
+    "requests>=2.34.2",
+    "uvicorn>=0.53.0",
+]
+
+[project.scripts]
+dataapi = "dataapi:main"
+
+[build-system]
+requires = ["uv_build>=0.12.7,<0.13.0"]
+build-backend = "uv_build"

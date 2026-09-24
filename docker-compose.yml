@@ -1,0 +1,5 @@
+services:
+  api-accenture:
+    image: fastapi-app-dim:0.1
+    ports:
+      - "8005:8000"
