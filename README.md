@@ -12,6 +12,8 @@ workspace-rginstructor013gDD  Log Analytics workspace Germany West Central
 
 powershell variables
 ```
+
+#change according to your resource group
 $ResourceGroup = "rg-instructor-01"
 $Location = " germanywestcentral"
 

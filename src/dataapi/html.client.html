@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My form</title>
+</head>
+<body>
+    <form id="promptForm">
+        <label for="myPrompt">Give prompt</label>
+        <input type="text" id="myPrompt" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <pre id="result"></pre>
+
+    <script>
+        document.getElementById("promptForm").addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const prompt = document.getElementById("myPrompt").value;
+            const result = document.getElementById("result");
+
+            try {
+                const response = await fetch("https://dimmer.wittyforest-7ebb2ea7.westeurope.azurecontainerapps.io/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ prompt })
+                });
+
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                result.textContent = await response.text();
+            } catch (error) {
+                result.textContent = `Request failed: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -35,8 +35,8 @@ az deployment group create `
         workspaceName=$WorkspaceName
 Assert-LastCommand
 
-docker build -t $LocalImage .
-Assert-LastCommand
+# docker build -t $LocalImage .
+# Assert-LastCommand
 
 az acr login --name $AcrName
 Assert-LastCommand

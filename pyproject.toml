@@ -8,6 +8,7 @@ authors = [
 ]
 requires-python = ">=3.11"
 dependencies = [
+    "databricks-connect>=16.1.7",
     "dotenv>=0.9.9",
     "fastapi>=0.141.1",
     "langchain-core>=1.6.4",

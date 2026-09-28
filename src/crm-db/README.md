@@ -1,0 +1,2 @@
+uv add databricks-sdk
+
