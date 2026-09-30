@@ -9,8 +9,10 @@ authors = [
 requires-python = ">=3.11"
 dependencies = [
     "databricks-connect>=16.1.7",
+    "deepagents>=0.7.20",
     "dotenv>=0.9.9",
     "fastapi>=0.141.1",
+    "langchain>=1.4.3",
     "langchain-core>=1.6.4",
     "langchain-openai>=1.6.5",
     "langgraph>=1.2.12",
