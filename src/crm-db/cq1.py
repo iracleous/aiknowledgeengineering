@@ -22,8 +22,9 @@ def get_spark_session():
 
  
 def main():
+    tableName = "data2026acc123456.crm.bronze_billing"
     spark = get_spark_session()
-    df = spark.read.table("crm.crm11")
+    df = spark.read.table(tableName)
     count = df.count()
     return {
         "message": "Connected to Azure Databricks Serverless!",

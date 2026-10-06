@@ -3,9 +3,13 @@
 uploads text data
 """
 from databricks.sdk import WorkspaceClient
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 # 1. Initialize the WorkspaceClient using your named profile 'p1'
-w = WorkspaceClient(profile="p1")
+w = WorkspaceClient()
 
 # 2. Define your local file path and the target Unity Catalog Volume path
 local_file_path = "data/data.csv"  # Replace with your actual local file

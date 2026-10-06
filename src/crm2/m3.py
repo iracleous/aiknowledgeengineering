@@ -1,10 +1,11 @@
 from databricks.connect import DatabricksSession
+from dotenv import load_dotenv
 
-# Initialize session using your named CLI profile 'p1'
+load_dotenv()
+#
 spark = DatabricksSession.builder \
     .serverless() \
-    .profile("p1") \
-    .getOrCreate()
+      .getOrCreate()
 
 print("Successfully connected to Azure Databricks using profile: p1")
 
@@ -15,7 +16,7 @@ spark.sql("USE crm")
 # 2. Create the 'crm11' table with sample data
 print("Creating and populating table crm11...")
 spark.sql("""
-    CREATE TABLE IF NOT EXISTS crm11 (
+    CREATE TABLE IF NOT EXISTS crm12 (
         customer_id INT,
         interaction_date DATE,
         channel STRING,

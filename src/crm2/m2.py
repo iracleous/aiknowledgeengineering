@@ -1,4 +1,8 @@
 from databricks.connect import DatabricksSession
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 # Initialize session using your exact Azure Databricks host URL
 spark = DatabricksSession.builder \
@@ -15,7 +19,7 @@ spark.sql("USE crm")
 # 2. Create the 'crm11' table with sample data
 print("Creating and populating table crm11...")
 spark.sql("""
-    CREATE TABLE IF NOT EXISTS crm11 (
+    CREATE TABLE IF NOT EXISTS crm13 (
         customer_id INT,
         interaction_date DATE,
         channel STRING,
@@ -25,7 +29,7 @@ spark.sql("""
 
 # Insert sample data into crm11
 spark.sql("""
-    INSERT INTO crm11 VALUES 
+    INSERT INTO crm13 VALUES 
     (101, '2026-09-01', 'Web', 45.0),
     (102, '2026-09-02', 'Mobile', 120.5),
     (103, '2026-09-03', 'Store', 65.0),
@@ -33,7 +37,7 @@ spark.sql("""
 """)
 
 # 3. Read from the newly created table using PySpark DataFrame API
-table_name = "crm.crm11"
+table_name = "crm.crm13"
 print(f"Reading data from {table_name}...")
 
 df = spark.read.table(table_name)
