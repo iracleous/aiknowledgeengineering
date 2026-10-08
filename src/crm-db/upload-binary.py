@@ -1,6 +1,6 @@
 """
-
-binary text data
+How to upload a binary file to Databricks using the Databricks SDK for Python.
+This script demonstrates how to upload a local file (data.csv) to a Databricks volume
 """
 
 
