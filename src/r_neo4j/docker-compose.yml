@@ -1,0 +1,27 @@
+services:
+  neo4j:
+    image: neo4j:5.26
+    container_name: neo4j
+    ports:
+      - "7474:7474"   # browser UI: http://localhost:7474
+      - "7687:7687"   # bolt protocol, used by langchain-neo4j
+
+    environment:
+      NEO4J_AUTH: neo4j/codehubpassword
+
+      # Install APOC Core
+      NEO4J_PLUGINS: '["apoc"]'
+
+      # Permit the schema procedure required by LangChain
+      NEO4J_dbms_security_procedures_unrestricted: apoc.meta.*
+
+      # Only necessary if an allowlist is already configured
+      # NEO4J_dbms_security_procedures_allowlist: apoc.meta.*
+
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+
+volumes:
+  neo4j_data:
+  neo4j_logs:

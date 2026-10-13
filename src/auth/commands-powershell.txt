@@ -1,0 +1,86 @@
+$baseUrl = "http://127.0.0.1:8000"
+
+Invoke-RestMethod -Uri "$baseUrl/public" -Method Get
+
+--- login
+$loginBody = @{
+    username = "student"
+    password = "Student123!"
+}
+
+$loginResponse = Invoke-RestMethod `
+    -Uri "$baseUrl/login" `
+    -Method Post `
+    -ContentType "application/x-www-form-urlencoded" `
+    -Body $loginBody
+
+$token = $loginResponse.access_token
+
+$loginResponse
+
+
+--- Test the secured endpoint
+$headers = @{
+    Authorization = "Bearer $token"
+}
+
+Invoke-RestMethod `
+    -Uri "$baseUrl/protected" `
+    -Method Get `
+    -Headers $headers
+
+
+Get the authenticated user
+Invoke-RestMethod `
+    -Uri "$baseUrl/users/me" `
+    -Method Get `
+    -Headers $headers
+
+Expected values:
+username full_name
+-------- ---------
+student  Demo Student
+
+6. Verify that access without a token fails
+try {
+    Invoke-RestMethod -Uri "$baseUrl/protected" -Method Get
+}
+catch {
+    Write-Host "HTTP status:" ([int]$_.Exception.Response.StatusCode)
+    Write-Host "Response:" $_.ErrorDetails.Message
+}
+
+-----
+Expected status: 401.
+7. Test an invalid token
+try {
+    Invoke-RestMethod `
+        -Uri "$baseUrl/protected" `
+        -Method Get `
+        -Headers @{ Authorization = "Bearer invalid-token" }
+}
+catch {
+    Write-Host "HTTP status:" ([int]$_.Exception.Response.StatusCode)
+    Write-Host "Response:" $_.ErrorDetails.Message
+}
+
+----------
+Expected status: 401.
+8. Test an incorrect password
+try {
+    Invoke-RestMethod `
+        -Uri "$baseUrl/login" `
+        -Method Post `
+        -ContentType "application/x-www-form-urlencoded" `
+        -Body @{
+            username = "student"
+            password = "wrong-password"
+        }
+}
+catch {
+    Write-Host "HTTP status:" ([int]$_.Exception.Response.StatusCode)
+    Write-Host "Response:" $_.ErrorDetails.Message
+}
+
+-----
+Expected status: 401.

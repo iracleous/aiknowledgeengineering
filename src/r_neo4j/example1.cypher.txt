@@ -1,0 +1,134 @@
+// Basic Neo4j Cypher Operations
+
+
+// Clear the database (delete all nodes and relationships)
+MATCH (n)
+DETACH DELETE n;
+
+
+// Check existing nodes
+MATCH (n)
+RETURN n;
+
+MATCH (n)
+RETURN count(n);
+
+// ---------------------------------------------------------------------
+// Create Person nodes assigning them to variables
+// ---------------------------------------------------------------------
+// Create Person nodes
+CREATE (:Person {name: "Alice", age: 32, occupation: "Data Scientist"});
+CREATE (:Person {name: "Bob", age: 35, occupation: "Software Engineer"});
+CREATE (:Person {name: "Charlie", age: 28, occupation: "UX Designer"});
+CREATE (:Person {name: "Diana", age: 41, occupation: "Project Manager"});
+CREATE (:Person {name: "Edward", age: 25, occupation: "Data Analyst"});
+
+// Create Interest nodes
+CREATE (graphdb:Interest {name: "Graph Databases", category: "Technology"});
+CREATE (cycling:Interest {name: "Cycling", category: "Sports"});
+CREATE (cooking:Interest {name: "Cooking", category: "Hobby"});
+CREATE (photography:Interest {name: "Photography", category: "Arts"});
+CREATE (travel:Interest {name: "Travel", category: "Lifestyle"});
+
+// ---------------------------------------------------------------------
+// Create FRIENDS_WITH relationships
+MATCH (p1:Person {name: "Alice"})
+MATCH (p2:Person {name: "Bob"})
+CREATE (p1)-[:FRIENDS_WITH {since: 2018}]->(p2);
+
+MATCH (p1:Person {name: "Alice"})
+MATCH (p2:Person {name: "Charlie"})
+CREATE (p1)-[:FRIENDS_WITH {since: 2020}]->(p2);
+
+MATCH (p1:Person {name: "Bob"})
+MATCH (p2:Person {name: "Diana"})
+CREATE (p1)-[:FRIENDS_WITH {since: 2015}]->(p2);
+
+MATCH (p1:Person {name: "Charlie"})
+MATCH (p2:Person {name: "Diana"})
+CREATE (p1)-[:FRIENDS_WITH {since: 2019}]->(p2);
+
+MATCH (p1:Person {name: "Diana"})
+MATCH (p2:Person {name: "Edward"})
+CREATE (p1)-[:FRIENDS_WITH {since: 2021}]->(p2);
+
+// ---------------------------------------------------------------------
+// Create INTERESTED_IN relationships
+MATCH (p:Person {name: "Alice"})
+MATCH (i:Interest {name: "Graph Databases"})
+CREATE (p)-[:INTERESTED_IN {level: "Expert"}]->(i);
+
+MATCH (p:Person {name: "Alice"})
+MATCH (i:Interest {name: "Cycling"})
+CREATE (p)-[:INTERESTED_IN {level: "Intermediate"}]->(i);
+
+MATCH (p:Person {name: "Bob"}), (i:Interest {name: "Graph Databases"})
+CREATE (p)-[:INTERESTED_IN {level: "Beginner"}]->(IS);
+
+MATCH (p:Person {name: "Bob"}), MATCH(i:Interest {name: "Cooking"})
+CREATE (p)-[:INTERESTED_IN {level: "Advanced"}]->(i);
+
+MATCH (charlie:Person {name: "Charlie"})
+MATCH (i:Interest {name: "Photography"})
+CREATE (charlie)-[:INTERESTED_IN {level: "Expert"}]->(i);
+
+MATCH (p:Person {name: "Charlie"})
+MATCH (i:Interest {name: "Cycling"})
+CREATE (p)-[:INTERESTED_IN {level: "Expert"}]->(i);
+
+MATCH (p:Person {name: "Diana"})
+MATCH (i:Interest {name: "Travel"})
+CREATE (p)-[:INTERESTED_IN {level: "Advanced"}]->(i);
+
+MATCH (p:Person {name: "Diana"})
+MATCH (i:Interest {name: "Cooking"})
+CREATE (p)-[:INTERESTED_IN {level: "Intermediate"}]->(i);
+
+MATCH (p:Person {name: "Edward"}), MATCH(i:Interest {name: "Graph Databases"})
+CREATE (p)-[:INTERESTED_IN {level: "Beginner"}]->(i);
+
+MATCH (p:Person {name: "Edward"})
+MATCH (i:Interest {name: "Cycling"})
+CREATE (p)-[:INTERESTED_IN {level: "Advanced"}]->(i);
+
+// ---------------------------------------------------------------------
+// Querying the Graph - Basic READ Operations
+// These queries demonstrate how to retrieve data from the graph
+
+// Finding Nodes by Label and Properties
+MATCH (p:Person)
+RETURN p;
+
+// Find people over 30 years old
+MATCH (p:Person)
+WHERE p.age > 30
+RETURN p.name, p.age, p.occupation;
+
+// Find who is friends with whom
+MATCH (p1:Person)-[r:FRIENDS_WITH]->(p2:Person)
+RETURN p1.name, p2.name, r.since;
+
+// Find Alice's friends
+MATCH (alice:Person {name: "Alice"})-[:FRIENDS_WITH]->(friend)
+RETURN friend.name;
+
+// Find people interested in Graph Databases
+MATCH (p:Person)-[:INTERESTED_IN]->(i:Interest {name: "Graph Databases"})
+RETURN p;
+
+
+// People who are interested in more than one interest
+MATCH (p:Person)-[:INTERESTED_IN]->(i:Interest)
+WITH p, count(i) AS interest_count
+WHERE interest_count > 1
+RETURN p.name, interest_count;
+
+// Select people who are friends with someone interested in "Cycling"
+MATCH (p:Person)-[:FRIENDS_WITH]->(friend:Person)
+MATCH (friend:Person)-[:INTERESTED_IN]->(i:Interest {name: "Cycling"})
+RETURN p.name, friend.name, i.name;
+
+
+// Delete 
+MATCH (i:Interest {name: "Photography"})
+DELETE i;
