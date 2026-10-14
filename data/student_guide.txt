@@ -1,0 +1,28 @@
+STUDENT GUIDE
+Author: Student Services
+Publication date: 2026-10-01
+Document type: guide
+Version: 1.0
+
+This fictional guide is sample data for a RAG training exercise.
+
+ACCESSING THE LEARNING PORTAL
+After enrollment is confirmed, students receive an activation email. Activate the account within 48 hours and set a password. If the link expires, ask Student Services for a replacement.
+
+FINDING COURSE MATERIALS
+Open My Courses and select the enrolled course. Slides, exercises, datasets, and recorded sessions appear under Learning Materials. Course materials remain accessible for 90 calendar days after course completion.
+
+GETTING HELP
+For account and enrollment questions, contact support@example.com. Student Services operates Monday to Friday, 09:00-17:00, Athens time, and aims to respond within two working days. For subject questions, use the course discussion board or contact the instructor.
+
+SUBMITTING THE CAPSTONE
+Upload the final report and repository link through the Assignments area by the course deadline. The portal provides a submission receipt. Group projects must identify each team member and their contribution. The instructor publishes feedback in the same area.
+
+VIEWING CERTIFICATES
+Open My Profile, then Certifications. A certificate appears after the Training Department verifies completion requirements. You can download it or generate a sharing link. External uploads must include the issuing organization and issue date; an upload does not automatically become a verified credential.
+
+MENTORING AND CONTINUING EDUCATION
+Graduates can request a 30-minute mentoring session and browse advanced courses in the Alumni area. Recommendations use the graduate's stated interests and completed courses. Students can update these interests in their profile.
+
+POLICY QUESTIONS
+Consult the Training Participation and Certification Policy for attendance thresholds, assessment requirements, resits, certificate issuance times, and sharing-link expiry. This guide explains portal use and does not change those requirements.

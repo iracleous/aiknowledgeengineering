@@ -8,6 +8,7 @@ authors = [
 ]
 requires-python = ">=3.12, <3.13"
 dependencies = [
+    "chainlit>=2.12.0",
     "chromadb>=1.5.9",
     "databricks-connect>=16.3.1",
     "databricks-sql-connector>=4.6.0",
@@ -15,6 +16,8 @@ dependencies = [
     "dotenv>=0.9.9",
     "fastapi>=0.141.1",
     "langchain>=1.4.3",
+    "langchain-chroma>=1.1.0",
+    "langchain-community>=0.4.2",
     "langchain-core>=1.6.4",
     "langchain-neo4j>=0.11.0",
     "langchain-openai>=1.6.5",
@@ -24,6 +27,7 @@ dependencies = [
     "owlrl>=7.6.2",
     "pwdlib[argon2]>=0.3.1",
     "pyjwt>=2.15.1",
+    "pypdf>=6.20.1",
     "python-dotenv>=1.2.3",
     "python-multipart>=0.0.32",
     "rdflib>=7.6.0",
